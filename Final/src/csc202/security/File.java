@@ -119,6 +119,8 @@ public class File extends java.io.File{
      * @param filename name of the file
      * @param text the text would be encrypted within the file.
      * @return true if it successfully written otherwise, false.
+     *
+     * @author Souleiman Ayoub
      */
     public static boolean write(String filename, String text){
         File file = new File(filename);
@@ -139,6 +141,8 @@ public class File extends java.io.File{
      * @param location location of where the file is on the disk
      * @return String of what is within a file.
      * @throws java.io.IOException in case something goes wrong
+     *
+     * @author Souleiman Ayoub
      */
     public static String read(String location) throws IOException {
         File file = new File(location);
@@ -149,24 +153,13 @@ public class File extends java.io.File{
      * Prepares a List of given bytes
      * @param bytes bytes given to us to convert
      * @return an arrayList of bytes
+     *
+     * @author Souleiman Ayoub
      */
     protected static ArrayList<Byte> loadList(byte[] bytes){
         ArrayList<Byte> list = new ArrayList<Byte>(bytes.length); //initial capacity of the list would be the size of bytes
         for(byte b : bytes)
             list.add(b);
         return list;
-    }
-
-    /**
-     * Converts List into an Array
-     * @param list list that we need to convert
-     * @return array of bytes
-     */
-    protected static byte[] rewind(ArrayList<Byte> list){
-        byte[] bytes = new byte[list.size()];
-        for(int i = 0; i < bytes.length; i++)
-            bytes[i] = list.get(i);
-
-        return bytes;
     }
 }

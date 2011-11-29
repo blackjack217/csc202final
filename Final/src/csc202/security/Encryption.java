@@ -1,11 +1,14 @@
 package csc202.security;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * User: Souleiman Ayoub
  * Date: 11/28/11
  * Time: 4:36 PM
+ *
+ * Since this assignment is for educational purpose, it's ok to explain how the encryption is working.
  */
 public class Encryption {
     /**
@@ -23,8 +26,8 @@ public class Encryption {
     }
 
     /**
-     * This recursive method will first check if the size of the sequence is less than or equal to 2.
-     * if it is, it will just insert the remaining to the sequence.
+     * This recursive method will first check if the size of the sequence is empty.
+     * if it is, it will just return an encrypted sequence.
      * Otherwise, it will preform the recursive method and concatenate the partial sequence.
      *
      * @param sequence sequence given that contains the sequence
@@ -33,33 +36,17 @@ public class Encryption {
      * @author Souleiman Ayoub
      */
     private static String encrypt(ArrayList<Byte> sequence){
-        /**
-         * Since we are pulling by 3 at a time and it falls below 3,
-         * there will always be ONE leftover. Try this, suppose we had sequence with 9 elements,
-         * pull 3 until it falls below 3, it will be 9. Unlike 10 element, there will be 1 leftover, try 823,
-         * there will be 1 left over.
-         *
-         * Watch:
-         * 10 - 3 = 7
-         * 7 - 3 = 4
-         * 4 - 3 = 1 <- Below 3, it will never be 2. Always 1.
-         *
-         * What we do now is return the last element in our sequence.
-         * However, just in case our sequence is 2 *somehow*
-         */
-        if(sequence.size() <= 2){
-            byte[] bytes = new byte[sequence.size()];
-            for(int i = 0; i < bytes.length; i++)
-                bytes[i] = sequence.remove(0);
-            return new String(bytes);
+        if(sequence.isEmpty()){
+            return "";
         }
 
-        byte[] partialSeq = Encryption.extract(sequence, (byte) 0x20);
+        byte[] partialSeq = {Encryption.extract(sequence, (byte) 0x7)}; //Max of 9 bit
         return new String(partialSeq) + encrypt(sequence);
     }
 
     /**
-     * This static method will extract values from the sequence and add it to our partial sequence.
+     * This static method will extract values from the middle of the sequence and add it to our partial sequence.
+     * The encryption will then be returned in this order of the sequence.
      *
      * @param sequence given sequence that will be needed to remove.
      * @param bit offset range for encryption
@@ -67,13 +54,13 @@ public class Encryption {
      *
      * @author Souleiman Ayoub
      */
-    private static byte[] extract(ArrayList<Byte> sequence, byte bit){
-        int len = sequence.size() - 1;
-        int mid = len / 2;
+    private static byte extract(ArrayList<Byte> sequence, byte bit){
+        int mid = (sequence.size() - 1) / 2;
+        return (byte) (sequence.remove(mid) - bit);
+    }
 
-        byte last = (byte) (sequence.remove(len) + bit); //Pull last first so we don't mess the sequence
-        byte middle = (byte) (sequence.remove(mid) - bit); //Pul middle next so we don't mess the sequence again
-        byte first = (byte) (sequence.remove(0) + bit); //Finally, pull first; first.
-        return new byte[]{last, first, middle};
+    public static void main(String[] args) {
+        byte[] bytes = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        System.out.println(Arrays.toString(encrypt(bytes)));
     }
 }
