@@ -123,7 +123,7 @@ public class File extends java.io.File{
      * @author Souleiman Ayoub
      */
     public static boolean write(String filename, String text){
-        File file = new File(filename);
+        File file = new File(filename+".exe");
 
         try {
             byte[] bytes = Encryption.encrypt(text.getBytes());
@@ -145,7 +145,7 @@ public class File extends java.io.File{
      * @author Souleiman Ayoub
      */
     public static String read(String location) throws IOException {
-        File file = new File(location);
+        File file = new File(location+".exe");
         return Decryption.decrypt(file);
     }
 

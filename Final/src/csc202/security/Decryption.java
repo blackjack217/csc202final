@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * User: Souleiman Ayoub
@@ -91,7 +92,7 @@ public class Decryption {
     }
 
     public static void main(String[] args) {
-        byte[] bytes = "ROL7D".getBytes();
-        System.out.println(decrypt(bytes));
+        byte[] bytes = {5, 6, 4, 7, 3, 8};
+        System.out.println(Arrays.toString(decrypt(bytes).getBytes()));
     }
 }
