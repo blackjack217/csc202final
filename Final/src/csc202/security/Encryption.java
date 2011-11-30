@@ -19,7 +19,7 @@ public class Encryption {
      *
      * @author Souleiman Ayoub
      */
-    protected static byte[] encrypt(byte[] bytes) {
+    public static byte[] encrypt(byte[] bytes) {
         ArrayList<Byte> list = File.loadList(bytes);
         String sequence = encrypt(list);
         return sequence.getBytes();
@@ -40,7 +40,7 @@ public class Encryption {
             return "";
         }
 
-        byte[] partialSeq = {Encryption.extract(sequence, (byte) 0x7)}; //Max of 9 bit
+        byte[] partialSeq = {Encryption.extract(sequence, (byte) 0x7F)}; //Max of 127 bit
         return new String(partialSeq) + encrypt(sequence);
     }
 
@@ -56,11 +56,11 @@ public class Encryption {
      */
     private static byte extract(ArrayList<Byte> sequence, byte bit){
         int mid = (sequence.size() - 1) / 2;
-        return (byte) (sequence.remove(mid) - bit);
+        return (byte) (sequence.remove(mid) ^ bit);
     }
 
     public static void main(String[] args) {
-        byte[] bytes = {10, 11, 12, 13, 14, 15};
+        byte[] bytes = {10, 11, 12, 13, 14, 16};
         System.out.println(Arrays.toString(encrypt(bytes)));
     }
 }
