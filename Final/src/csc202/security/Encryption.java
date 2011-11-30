@@ -60,7 +60,7 @@ public class Encryption {
     }
 
     public static void main(String[] args) {
-        byte[] bytes = {10, 11, 12, 13, 14, 16};
+        byte[] bytes = {10, 11, 12, 13, 14, 15, 17};
         System.out.println(Arrays.toString(encrypt(bytes)));
     }
 }

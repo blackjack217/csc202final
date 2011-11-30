@@ -27,7 +27,7 @@ public class Decryption {
     }
 
     /**
-     * <a href="http://www.mathtran.org/cgi-bin/mathtran?tex=index%20%3D%20%5Csum_%7Bi%3D0%7D%5E%7Bb.length%7D%20(-1)%5E(%5Ei%5E%2B%5E(%5Eb%5Em%5Eo%5Ed%5E2%5E%3D%5E%3D%5E0%5E%3F%5E1%5E%3A%5E-%5E1%5E)%5E)((i%20%2B%201)%20%2F%202)%20%2B%20((b%20-%201)%20%2F%202)">See Formula</a>
+     * <a href="http://www.mathtran.org/cgi-bin/mathtran?tex=index%20%3D%20%5Csum_%7Bi%3D0%7D%5E%7Bb.length%7D%20(-1)%5E(%5Ei%5E%2B%5E(%5Eb%5Em%5Eo%5Ed%5E2%5E%3D%5E%3D%5E0%5E%3F%5E1%5E%3A%5E0%5E)%5E)((i%20%2B%201)%20%2F%202)%20%2B%20((b%20-%201)%20%2F%202)">See Formula</a>
      * Takes the first value of the sequence and adds it to the middle.
      * However, this sequence is built up by an alternating series. Therefor, the next value goes next to the
      * sequence; and the value after that goes before the sequence.
@@ -41,7 +41,7 @@ public class Decryption {
         byte[] sequence = new byte[bytes.length];
         int middle = (bytes.length - 1) / 2;
         for(int i = 0; i < bytes.length; i++){
-            int pow = i + (bytes.length % 2 == 0 ? 1 : -1);
+            int pow = i + (bytes.length % 2 == 0 ? 1 : 0);
             int offset = ((i + 1) / 2);
             int result = (int)(Math.pow(-1, pow)) * offset + middle;
             sequence[result] = (byte) (bytes[i] ^ 0x7F);
@@ -69,7 +69,7 @@ public class Decryption {
     }
 
     public static void main(String[] args) {
-        byte[] bytes = {115, 114, 116, 113, 117, 111};
+        byte[] bytes = {114, 115, 113, 116, 112, 117, 110};
         System.out.println(Arrays.toString(decrypt(bytes)));
     }
 }
