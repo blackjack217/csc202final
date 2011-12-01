@@ -89,7 +89,7 @@ public class Order implements Comparable<Order>{
 		dateForm.format(date.getTime());
 	}
 	/**
-	 * @return The Entire Linked List of Items
+	 * @return The Entire Linked List of items
 	 */
 	public LinkedList<Items> getItemsList(){
 		return items;

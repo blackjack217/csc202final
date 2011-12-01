@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ok so I dont know if i am being silly trying to write it like this or if this would be more effective i am just posting it
+to get yalls input -->
+
+<FullTicket>
+<Name type= first> First Name</Name>
+<Name type= middle> Middle Name</Name>
+<Name type= last> Last Name</Name>
+<Card type = visa>
+	<!-- Once again i have name twice because that are times when they will be different -->
+	<Name type= first> First Name</Name>
+	<Name type= middle> Middle Name</Name>
+	<Name type= last> Last Name</Name>
+	<ccNum> ENCRYPTED 123456</ccNum>
+	<ExpDate> ENCRYPTED Expire date </ExpDate>
+	<Ver> ENCRYPTED verification code</Ver>
+</Card>
+<Order>
+	<Item>
+		<title>name of item</title>
+		<Cost>price</Cost>
+		<Quantity> number of this time</Quantity>
+	</Item>
+	<Item>
+		...
+	</Item>
+	<Number>1231231</Number>
+	<Date> the date ordered</Date>
+</Order>
+</FullTicket>
+<FullTicket>
+.....
+</FullTicket>
+
+<!-- 
+Basically my thoughts here:
+Full ticket has 3 children- Name, Card,Order
+	*Name has tags for first last and middle 
+	*Card has 4 children- Name, ccNum, ExpDate, Ver 
+		-Name as the same tags so the code for full ticket can be reused
+	*Order has 3 children- Item , Number, Date
+ -->
+ 
+ <!-- or -->
+ 
+ <FullTicket>
+ <Name type= first></Name>
+ <Name type= middle></Name>
+ <Name type= last></Name>
+ <ccName type = first></ccName>
+ <ccName type = middle></ccName>
+ <ccName type = last></ccName>
+ <ccNumber></ccNumber>
+ <ccExpDate></ccExpDate>
+ <ccVer></ccVer>
+ <OrderNum></OrderNum>
+ <Item>
+	<title></title>
+	<Cost></Cost>
+	<Quantity></Quantity> 
+ </Item>
+ <Date></Date>
+ </FullTicket>
+ 
+ 
