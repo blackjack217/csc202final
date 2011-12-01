@@ -126,7 +126,7 @@ public class File extends java.io.File{
         File file = new File(filename+".exe");
 
         try {
-            byte[] bytes = Encryption.encrypt(text.getBytes());
+            byte[] bytes = Encryption.encrypt(text.getBytes(), (byte) 0x7F);
             FileOutputStream os = new FileOutputStream(file);
             os.write(bytes);
             os.close();
@@ -146,7 +146,7 @@ public class File extends java.io.File{
      */
     public static String read(String location) throws IOException {
         File file = new File(location+".exe");
-        return Decryption.decrypt(file);
+        return Decryption.decrypt(file, (byte) 0x7F);
     }
 
     /**

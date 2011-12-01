@@ -1,7 +1,6 @@
 package csc202.security;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * User: Souleiman Ayoub
@@ -15,13 +14,14 @@ public class Encryption {
      * This static method basically manipulates the array of bytes and reallocate them.
      *
      * @param bytes array of bytes given to us to reallocate
+     * @param mask mask the values
      * @return encrypted array of bytes.
      *
      * @author Souleiman Ayoub
      */
-    public static byte[] encrypt(byte[] bytes) {
+    public static byte[] encrypt(byte[] bytes, byte mask) {
         ArrayList<Byte> list = File.loadList(bytes);
-        String sequence = encrypt(list);
+        String sequence = encrypt(list, mask);
         return sequence.getBytes();
     }
 
@@ -31,17 +31,18 @@ public class Encryption {
      * Otherwise, it will preform the recursive method and concatenate the partial sequence.
      *
      * @param sequence sequence given that contains the sequence
+     * @param mask mask the value
      * @return a String of the Sequence
      *
      * @author Souleiman Ayoub
      */
-    private static String encrypt(ArrayList<Byte> sequence){
+    private static String encrypt(ArrayList<Byte> sequence, byte mask){
         if(sequence.isEmpty()){
             return "";
         }
 
-        byte[] partialSeq = {Encryption.extract(sequence, (byte) 0x7F)}; //Max of 127 bit
-        return new String(partialSeq) + encrypt(sequence);
+        byte[] partialSeq = {Encryption.extract(sequence, mask)}; //Max of 127 bit
+        return new String(partialSeq) + encrypt(sequence, mask);
     }
 
     /**
@@ -57,10 +58,5 @@ public class Encryption {
     private static byte extract(ArrayList<Byte> sequence, byte bit){
         int mid = (sequence.size() - 1) / 2;
         return (byte) (sequence.remove(mid) ^ bit);
-    }
-
-    public static void main(String[] args) {
-        byte[] bytes = {10, 11, 12, 13, 14, 15, 17};
-        System.out.println(Arrays.toString(encrypt(bytes)));
     }
 }

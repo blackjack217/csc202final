@@ -4,7 +4,6 @@ package csc202.security;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 /**
  * User: Souleiman Ayoub
@@ -16,14 +15,15 @@ public class Decryption {
      * Decrypts the file and returns a String
      *
      * @param file that we want to decrypt
+     * @param mask unmasking value
      * @return String of what is within the file, decrypted
      * @throws IOException in case something goes wrong
      *
      * @author Souleiman Ayoub
      */
-    public static String decrypt(File file) throws IOException {
+    public static String decrypt(File file, byte mask) throws IOException {
         byte[] bytes = Decryption.getByte(file);
-        return new String(decrypt(bytes));
+        return new String(decrypt(bytes, mask));
     }
 
     /**
@@ -33,18 +33,19 @@ public class Decryption {
      * sequence; and the value after that goes before the sequence.
      *
      * @param bytes the given sequence
+     * @param mask unmask value
      * @return a String of decrypted message
      *
      * @author Souleiman Ayoub
      */
-    public static byte[] decrypt(byte [] bytes){
+    public static byte[] decrypt(byte [] bytes, byte mask){
         byte[] sequence = new byte[bytes.length];
         int middle = (bytes.length - 1) / 2;
         for(int i = 0; i < bytes.length; i++){
             int pow = i + (bytes.length % 2 == 0 ? 1 : 0);
             int offset = ((i + 1) / 2);
             int result = (int)(Math.pow(-1, pow)) * offset + middle;
-            sequence[result] = (byte) (bytes[i] ^ 0x7F);
+            sequence[result] = (byte) (bytes[i] ^ mask);
         }
         return sequence;
     }
@@ -66,10 +67,5 @@ public class Decryption {
         while (offset < bytes.length && (readByte = is.read(bytes, offset, bytes.length-offset)) >= 0)
             offset += readByte;
         return bytes;
-    }
-
-    public static void main(String[] args) {
-        byte[] bytes = {114, 115, 113, 116, 112, 117, 110};
-        System.out.println(Arrays.toString(decrypt(bytes)));
     }
 }
