@@ -13,7 +13,7 @@ public abstract class Card implements Part {
     public static final int VISA = 0;
     public static final int MASTERCARD = 1;
     public static final int AMERICAN_EXPRESS = 2;
-    public static final int DISCOVERY = 3;
+    public static final int DISCOVER = 3;
     public static final int UNKNOWN = -1;
 
     protected Name name;

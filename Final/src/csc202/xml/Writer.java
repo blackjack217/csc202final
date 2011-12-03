@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import csc202.security.SafeString;
+
 /**
  * 
  * @author Justin Jansen
@@ -148,25 +150,26 @@ public class Writer {
 	
 	/**
 	 * Adds the <Card> tag
+	 * @param - Type of card: visa mastercard amex 
 	 * @throws orderingException -If <FullTicket> does not exist this error will occur. Or if <Item>, <Card> or <Order> do exist.
 	 */
-	public void addCardStart() throws orderingException{
+	public void addCardStart(String type) throws orderingException{
 		checkFullTicket();
 		if((item)||(order)||(card)){
 			throw new orderingException("Name can't be placed while Item or Order exist");
 		}
-		printWriter.format("%s", "<Card>");
+		printWriter.format("%s%s%s", "<Card type=\"", type,"\">");
 		card = true;
 	}
 	
 	/**
 	 * Adds the <ccNumber> number </ccNumber> tag
-	 * @param number - The Credit Card Number
+	 * @param safeString - The Credit Card Number
 	 * @throws orderingException - If <FullTicket> or <Card> does not exist this error will occur. Or if <Item> or <Order> do exist.
 	 */
-	public void addCcNum(String number) throws orderingException{
+	public void addCcNum(SafeString safeString) throws orderingException{
 		checkCard();
-		printWriter.format("\t%s%s%s","<ccNumber>",number, "</ccNumber>");
+		printWriter.format("\t%s%s%s","<ccNumber>",safeString, "</ccNumber>");
 	}
 	
 	/**
@@ -181,12 +184,12 @@ public class Writer {
 	
 	/**
 	 * Adds the <verCode> code </verCode> tag
-	 * @param code - The expiration Date
+	 * @param safeString - The expiration Date
 	 * @throws orderingException - If <FullTicket> or <Card> does not exist this error will occur. Or if <Item> or <Order> do exist.
 	 */
-	public void addVerCode(String code) throws orderingException{
+	public void addVerCode(SafeString safeString) throws orderingException{
 		checkCard();
-		printWriter.format("\t%s%s%s","<verCode>",code, "</verCode>");
+		printWriter.format("\t%s%s%s","<verCode>",safeString, "</verCode>");
 	}
 	
 	/**

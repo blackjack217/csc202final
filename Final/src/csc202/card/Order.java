@@ -94,6 +94,12 @@ public class Order implements Comparable<Order>{
 	public LinkedList<Items> getItemsList(){
 		return items;
 	}
+	public String getOrderNumber(){
+		return orderNumber;
+	}
+	public String getOrderDate(){
+		return dateForm.toString(); //Will check if this is correct later
+	}
 	
 	@Override
 	public int compareTo(Order arg0) {
