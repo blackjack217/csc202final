@@ -8,7 +8,11 @@ import csc202.card.FullTicket;
 import csc202.card.Items;
 import csc202.card.Name;
 import csc202.card.Order;
-
+/**
+ * 
+ * @author Justin
+ * Date: 12/3/11
+ */
 public class AddFullTicket {
 		
 	private Name name;
