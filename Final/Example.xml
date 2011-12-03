@@ -24,7 +24,7 @@ to get yalls input -->
 	<Item>
 		...
 	</Item>
-	<Number>1231231</Number>
+	<orderNumber>1231231</orderNumber>
 	<Date> the date ordered</Date>
 </Order>
 </FullTicket>
@@ -61,5 +61,4 @@ Full ticket has 3 children- Name, Card,Order
  </Item>
  <Date></Date>
  </FullTicket>
- 
  
