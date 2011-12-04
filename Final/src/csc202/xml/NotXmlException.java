@@ -2,10 +2,10 @@ package csc202.xml;
 
 public class NotXmlException extends Exception {
 	
-	public notXmlException(){
+	public NotXmlException(){
 		super("The file selected is not in the Xml Format");
 	}
-	public notXmlException(String s){
+	public NotXmlException(String s){
 		super(s);
 	}
 }

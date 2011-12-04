@@ -29,7 +29,7 @@ public class AddFullTicket {
 	 * @throws NotXMLException - Thrown if Path Does not Contain an XML
 	 * @throws OrderingException - if for some reason the xml because out of order
 	 */
-	public AddFullTicket(FullTicket make, String filePath) throws IOException, NotXMLException, OrderingException {
+	public AddFullTicket(FullTicket make, String filePath) throws IOException, NotXmlException, OrderingException  {
 		write.openXml(filePath);
 		task(make);
 		write.closeWriter();
@@ -43,14 +43,14 @@ public class AddFullTicket {
 	 * @throws NotXMLException - Thrown if Path Does not Contain an XML
 	 * @throws OrderingException - if for some reason the xml because out of order
 	 */
-	public AddFullTicket(LinkedList<FullTicket> list, String filePath) throws IOException, NotXMLException, OrderingException {
+	public AddFullTicket(LinkedList<FullTicket> list, String filePath) throws IOException, NotXmlException, OrderingException {
 		write.openXml(filePath);
 		for(int i = 0; i<list.size(); i++){
 			task(list.get(i));
 		}
 		write.closeWriter();
 	}
-	private void task(FullTicket make) throws IOException, NotXMLException, OrderingException {
+	private void task(FullTicket make) throws IOException, NotXmlException, OrderingException {
 		name = make.getName();
 		card = make.getCard();
 		order = make.getOrder();

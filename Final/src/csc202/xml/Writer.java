@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import csc202.xml.NotXmlException;
+import csc202.xml.OrderingException;
 
 /**
  * 
@@ -29,11 +31,11 @@ public class Writer {
 	
 	
 	//Checks to see if the file is an XML file
-	private void checkFile(File file) throws NotXMLException {
+	private void checkFile(File file) throws NotXmlException  {
 		int i = file.getName().length() - 1;
 		String s = "" + file.getName().charAt(i-2) + file.getName().charAt(i-1) + file.getName().charAt(i);  
 		if(!s.equalsIgnoreCase("xml")){
-			throw new NotXMLException();
+			throw new NotXmlException();
 		}
 	}
 	
@@ -43,7 +45,7 @@ public class Writer {
 	 * @throws IOException - a error created by FileWriter  
 	 * @throws NotXMLException - the file found is not in the xml format
 	 */
-	public void openXml(String filePath) throws IOException, NotXMLException {
+	public void openXml(String filePath) throws IOException, NotXmlException {
 		checkFile(new File(filePath));
 		setWriteFile(new FileWriter(filePath, true));
 		setPrintWriter(new PrintWriter(writeFile));

@@ -2,10 +2,10 @@ package csc202.xml;
 
 public class OrderingException extends Exception {
 	
-	public orderingException(){
+	public OrderingException(){
 		super("An Ordering Error has Occured");
 	}
-	public orderingException(String s){
+	public OrderingException(String s){
 		super(s);
 	}
 	
