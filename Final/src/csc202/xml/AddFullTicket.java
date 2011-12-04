@@ -1,13 +1,14 @@
 package csc202.xml;
 
+import csc202.card.Card;
+import csc202.card.Name;
+import csc202.transaction.FullTicket;
+import csc202.transaction.Items;
+import csc202.transaction.Order;
+
 import java.io.IOException;
 import java.util.LinkedList;
 
-import csc202.card.Card;
-import csc202.card.FullTicket;
-import csc202.card.Items;
-import csc202.card.Name;
-import csc202.card.Order;
 /**
  * 
  * @author Justin
@@ -25,10 +26,10 @@ public class AddFullTicket {
 	 * @param make - A Full Ticket 
 	 * @param filePath - Location of XML File
 	 * @throws IOException - Created by FileWriter
-	 * @throws notXmlException - Thrown if Path Does not Contain an XML
-	 * @throws orderingException - if for some reason the xml because out of order
+	 * @throws NotXMLException - Thrown if Path Does not Contain an XML
+	 * @throws OrderingException - if for some reason the xml because out of order
 	 */
-	public AddFullTicket(FullTicket make, String filePath) throws IOException, notXmlException, orderingException{
+	public AddFullTicket(FullTicket make, String filePath) throws IOException, NotXMLException, OrderingException {
 		write.openXml(filePath);
 		task(make);
 		write.closeWriter();
@@ -39,17 +40,17 @@ public class AddFullTicket {
 	 * @param list - A linked list of Full Tickets
 	 * @param filePath - Location of XML File
 	 * @throws IOException - Created by FileWriter
-	 * @throws notXmlException - Thrown if Path Does not Contain an XML
-	 * @throws orderingException - if for some reason the xml because out of order
+	 * @throws NotXMLException - Thrown if Path Does not Contain an XML
+	 * @throws OrderingException - if for some reason the xml because out of order
 	 */
-	public AddFullTicket(LinkedList<FullTicket> list, String filePath) throws IOException, notXmlException, orderingException{
+	public AddFullTicket(LinkedList<FullTicket> list, String filePath) throws IOException, NotXMLException, OrderingException {
 		write.openXml(filePath);
 		for(int i = 0; i<list.size(); i++){
 			task(list.get(i));
 		}
 		write.closeWriter();
 	}
-	private void task(FullTicket make) throws IOException, notXmlException, orderingException{
+	private void task(FullTicket make) throws IOException, NotXMLException, OrderingException {
 		name = make.getName();
 		card = make.getCard();
 		order = make.getOrder();

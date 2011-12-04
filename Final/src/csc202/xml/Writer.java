@@ -1,11 +1,11 @@
 package csc202.xml;
 
+import csc202.security.SafeString;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import csc202.security.SafeString;
 
 /**
  * 
@@ -29,11 +29,11 @@ public class Writer {
 	
 	
 	//Checks to see if the file is an XML file
-	private void checkFile(File file) throws notXmlException{
+	private void checkFile(File file) throws NotXMLException {
 		int i = file.getName().length() - 1;
 		String s = "" + file.getName().charAt(i-2) + file.getName().charAt(i-1) + file.getName().charAt(i);  
 		if(!s.equalsIgnoreCase("xml")){
-			throw new notXmlException();
+			throw new NotXMLException();
 		}
 	}
 	
@@ -41,54 +41,54 @@ public class Writer {
 	 * Opens the xml file
 	 * @param filePath - the path to the xml file
 	 * @throws IOException - a error created by FileWriter  
-	 * @throws notXmlException - the file found is not in the xml format
+	 * @throws NotXMLException - the file found is not in the xml format
 	 */
-	public void openXml(String filePath) throws IOException, notXmlException{
+	public void openXml(String filePath) throws IOException, NotXMLException {
 		checkFile(new File(filePath));
 		setWriteFile(new FileWriter(filePath, true));
 		setPrintWriter(new PrintWriter(writeFile));
 	}
 	
 	//Checks to see a ticket has started
-	private void checkFullTicket() throws orderingException{
+	private void checkFullTicket() throws OrderingException {
 		if(!fullTicket){
-			throw new orderingException("You have not started a new ticket yet");
+			throw new OrderingException("You have not started a new ticket yet");
 		}
 	}
 	
 	//Checks to see a card has started 
 	//
-	private void checkCard() throws orderingException{
+	private void checkCard() throws OrderingException {
 		checkFullTicket();
 		if((!card)||(item)||(order)){
-			throw new orderingException("You have not Started a new card Yet");
+			throw new OrderingException("You have not Started a new card Yet");
 		}
 	}
 	
 	//Checks to see if a card has started
-	private void checkOrder() throws orderingException{
+	private void checkOrder() throws OrderingException {
 		checkFullTicket();
 		if((!order)||(card)){
-			throw new orderingException("You have not started a new order yet");
+			throw new OrderingException("You have not started a new order yet");
 		}
 	}
 	
 	//Checks to see if an item has started
-	private void checkItem() throws orderingException{
+	private void checkItem() throws OrderingException {
 		checkFullTicket();
 		checkOrder();
 		if((!item)||(card)){
-			throw new orderingException("You have not started a new item yet");
+			throw new OrderingException("You have not started a new item yet");
 		}
 	}
 	
 	/**
 	 * Adds the <FullTicket> tag
-	 * @throws orderingException - If Full Ticket already Exists
+	 * @throws OrderingException - If Full Ticket already Exists
 	 */
-	public void addFullTicketStart() throws orderingException{
+	public void addFullTicketStart() throws OrderingException {
 		if(fullTicket){
-			throw new orderingException("Full Ticket Already Exists");
+			throw new OrderingException("Full Ticket Already Exists");
 		}
 		printWriter.format("%s", "<FullTicket>");
 		fullTicket = true;
@@ -97,12 +97,12 @@ public class Writer {
 	/**
 	 * Adds the <Name type="first">name</Name> tag
 	 * @param name - First Name 
-	 * @throws orderingException - If <FullTicket> does not exist this error will occur. Or if <Item> or <Order> do exist.
+	 * @throws OrderingException - If <FullTicket> does not exist this error will occur. Or if <Item> or <Order> do exist.
 	 */
-	public void addFirstName(String name) throws orderingException{
+	public void addFirstName(String name) throws OrderingException {
 		checkFullTicket();
 		if((item)||(order)){
-			throw new orderingException("Name can't be placed while Item or Order exist");
+			throw new OrderingException("Name can't be placed while Item or Order exist");
 		}
 		else if(card){
 			printWriter.format("\t%s%s%s","<Name type=\"first\">",name, "<Name>");
@@ -115,12 +115,12 @@ public class Writer {
 	/**
 	 * Adds the <Name type="last">name</Name> tag
 	 * @param name - Last Name 
-	 * @throws orderingException - If <FullTicket> does not exist this error will occur. Or if <Item> or <Order> do exist.
+	 * @throws OrderingException - If <FullTicket> does not exist this error will occur. Or if <Item> or <Order> do exist.
 	 */
-	public void addLastName(String name) throws orderingException{
+	public void addLastName(String name) throws OrderingException {
 		checkFullTicket();
 		if((item)||(order)){
-			throw new orderingException("Name can't be placed while Item or Order exist");
+			throw new OrderingException("Name can't be placed while Item or Order exist");
 		}
 		else if(card){
 			printWriter.format("\t%s%s%s","<Name type=\"last\">",name, "<Name>");
@@ -133,12 +133,12 @@ public class Writer {
 	/**
 	 * Adds the <Name type="middle">name</Name> tag
 	 * @param name - Middle Name 
-	 * @throws orderingException - If <FullTicket> does not exist this error will occur. Or if <Item> or <Order> do exist.
+	 * @throws OrderingException - If <FullTicket> does not exist this error will occur. Or if <Item> or <Order> do exist.
 	 */
-	public void addMiddleName(String name) throws orderingException{
+	public void addMiddleName(String name) throws OrderingException {
 		checkFullTicket();
 		if((item)||(order)){
-			throw new orderingException("Name can't be placed while Item or Order exist");
+			throw new OrderingException("Name can't be placed while Item or Order exist");
 		}
 		else if(card){
 			printWriter.format("\t%s%s%s","<Name type=\"middle\">",name, "<Name>");
@@ -151,12 +151,12 @@ public class Writer {
 	/**
 	 * Adds the <Card> tag
 	 * @param - Type of card: visa mastercard amex 
-	 * @throws orderingException -If <FullTicket> does not exist this error will occur. Or if <Item>, <Card> or <Order> do exist.
+	 * @throws OrderingException -If <FullTicket> does not exist this error will occur. Or if <Item>, <Card> or <Order> do exist.
 	 */
-	public void addCardStart(String type) throws orderingException{
+	public void addCardStart(String type) throws OrderingException {
 		checkFullTicket();
 		if((item)||(order)||(card)){
-			throw new orderingException("Name can't be placed while Item or Order exist");
+			throw new OrderingException("Name can't be placed while Item or Order exist");
 		}
 		printWriter.format("%s%s%s", "<Card type=\"", type,"\">");
 		card = true;
@@ -165,9 +165,9 @@ public class Writer {
 	/**
 	 * Adds the <ccNumber> number </ccNumber> tag
 	 * @param safeString - The Credit Card Number
-	 * @throws orderingException - If <FullTicket> or <Card> does not exist this error will occur. Or if <Item> or <Order> do exist.
+	 * @throws OrderingException - If <FullTicket> or <Card> does not exist this error will occur. Or if <Item> or <Order> do exist.
 	 */
-	public void addCcNum(SafeString safeString) throws orderingException{
+	public void addCcNum(SafeString safeString) throws OrderingException {
 		checkCard();
 		printWriter.format("\t%s%s%s","<ccNumber>",safeString, "</ccNumber>");
 	}
@@ -175,9 +175,9 @@ public class Writer {
 	/**
 	 * Adds the <expDate> expDate </expDate> tag
 	 * @param expDate - The expiration Date
-	 * @throws orderingException - If <FullTicket> or <Card> does not exist this error will occur. Or if <Item> or <Order> do exist.
+	 * @throws OrderingException - If <FullTicket> or <Card> does not exist this error will occur. Or if <Item> or <Order> do exist.
 	 */
-	public void addExpDate(String expDate) throws orderingException{
+	public void addExpDate(String expDate) throws OrderingException {
 		checkCard();
 		printWriter.format("\t%s%s%s","<expDate>",expDate, "</expDate>");
 	}
@@ -185,18 +185,18 @@ public class Writer {
 	/**
 	 * Adds the <verCode> code </verCode> tag
 	 * @param safeString - The expiration Date
-	 * @throws orderingException - If <FullTicket> or <Card> does not exist this error will occur. Or if <Item> or <Order> do exist.
+	 * @throws OrderingException - If <FullTicket> or <Card> does not exist this error will occur. Or if <Item> or <Order> do exist.
 	 */
-	public void addVerCode(SafeString safeString) throws orderingException{
+	public void addVerCode(SafeString safeString) throws OrderingException {
 		checkCard();
 		printWriter.format("\t%s%s%s","<verCode>",safeString, "</verCode>");
 	}
 	
 	/**
 	 * Adds the </Card> tag
-	 * @throws orderingException - If <FullTicket> or <Card> does not exist this error will occur. Or if <Item> or <Order> do exist.
+	 * @throws OrderingException - If <FullTicket> or <Card> does not exist this error will occur. Or if <Item> or <Order> do exist.
 	 */
-	public void addCardEnd() throws orderingException{
+	public void addCardEnd() throws OrderingException {
 		checkCard();
 		printWriter.format("%s", "</Card>");
 		card = false;
@@ -204,12 +204,12 @@ public class Writer {
 	
 	/**
 	 *  Adds the <Order> tag
-	 * @throws orderingException - If <FullTicket> does not exist this error will occur. Or if <Item>, <Card>, or <Order> do exist.
+	 * @throws OrderingException - If <FullTicket> does not exist this error will occur. Or if <Item>, <Card>, or <Order> do exist.
 	 */
-	public void addOrderStart() throws orderingException{
+	public void addOrderStart() throws OrderingException {
 		checkFullTicket();
 		if((item)||(card)||(order)){
-			throw new orderingException("Item card or ticket may already exist");
+			throw new OrderingException("Item card or ticket may already exist");
 		}
 		printWriter.format("%s", "<Order>");
 		order = true;
@@ -218,12 +218,12 @@ public class Writer {
 	/**
 	 * Adds the <orderNum> number </orderNum>
 	 * @param number - Order number 
-	 * @throws orderingException - If <FullTicket> or <Order> does not exist this error will occur. Or if <Item> or <Card> do exist.
+	 * @throws OrderingException - If <FullTicket> or <Order> does not exist this error will occur. Or if <Item> or <Card> do exist.
 	 */
-	public void addOrderNum(String number) throws orderingException{
+	public void addOrderNum(String number) throws OrderingException {
 		checkOrder();
 		if(item){
-			throw new orderingException("Item may already exist");
+			throw new OrderingException("Item may already exist");
 		}
 		printWriter.format("\t%s%s%s","<orderNum>",number, "</orderNum>");
 	}
@@ -231,12 +231,12 @@ public class Writer {
 	/**
 	 * Adds the <orderDate> date </orderDate>
 	 * @param date - Order Date
-	 * @throws orderingException - If <FullTicket> or <Order> does not exist this error will occur. Or if <Item> or <Card> do exist.
+	 * @throws OrderingException - If <FullTicket> or <Order> does not exist this error will occur. Or if <Item> or <Card> do exist.
 	 */
-	public void addOrderDate(String date) throws orderingException{
+	public void addOrderDate(String date) throws OrderingException {
 		checkOrder();
 		if(item){
-			throw new orderingException("Item may already exist");
+			throw new OrderingException("Item may already exist");
 		}
 		printWriter.format("\t%s%s%s","<orderDate>",date, "</orderDate>");
 		
@@ -244,12 +244,12 @@ public class Writer {
 	
 	/**
 	 * Adds <Item> tag
-	 * @throws orderingException - If <FullTicket> or <Order> does not exist this error will occur. Or if <Item> or <Card> do exist.
+	 * @throws OrderingException - If <FullTicket> or <Order> does not exist this error will occur. Or if <Item> or <Card> do exist.
 	 */
-	public void addItemStart() throws orderingException{
+	public void addItemStart() throws OrderingException {
 		checkOrder();
 		if(item){
-			throw new orderingException("Item may already exist");
+			throw new OrderingException("Item may already exist");
 		}
 		printWriter.format("\t%s", "<Item>");
 		item = true;
@@ -258,9 +258,9 @@ public class Writer {
 	/**
 	 * Adds <itemName> name </itemName>
 	 * @param name - Name of the Item
-	 * @throws orderingException - If <FullTicket>, <Item> or <Order> does not exist this error will occur. Or if <Card> do exist.
+	 * @throws OrderingException - If <FullTicket>, <Item> or <Order> does not exist this error will occur. Or if <Card> do exist.
 	 */
-	public void addItemName(String name) throws orderingException{
+	public void addItemName(String name) throws OrderingException {
 		checkItem();
 		printWriter.format("\t\t%s%s%s","<itemName>",name, "</itemName>");
 	}
@@ -268,9 +268,9 @@ public class Writer {
 	/**
 	 * Adds <Price> price </Price> tag
 	 * @param price - The Price of the Item
-	 * @throws orderingException - If <FullTicket>, <Item> or <Order> does not exist this error will occur. Or if <Card> do exist.
+	 * @throws OrderingException - If <FullTicket>, <Item> or <Order> does not exist this error will occur. Or if <Card> do exist.
 	 */
-	public void addItemPrice(String price) throws orderingException{
+	public void addItemPrice(String price) throws OrderingException {
 		checkItem();
 		printWriter.format("\t\t%s%s%s","<Price>",price, "</Price>");
 	}
@@ -278,18 +278,18 @@ public class Writer {
 	/**
 	 * Adds <itemQuantity> num </itemQuantity> tag
 	 * @param num - the number of this type of item
-	 * @throws orderingException - If <FullTicket>, <Item> or <Order> does not exist this error will occur. Or if <Card> do exist.
+	 * @throws OrderingException - If <FullTicket>, <Item> or <Order> does not exist this error will occur. Or if <Card> do exist.
 	 */
-	public void addItemQuantity(String num) throws orderingException{
+	public void addItemQuantity(String num) throws OrderingException {
 		checkItem();
 		printWriter.format("\t\t%s%s%s","<itemQuantity>",num, "</itemQuantity>");
 	}
 	
 	/**
 	 * Adds </Item> tag
-	 * @throws orderingException - If <FullTicket>, <Item> or <Order> does not exist this error will occur. Or if <Card> do exist.
+	 * @throws OrderingException - If <FullTicket>, <Item> or <Order> does not exist this error will occur. Or if <Card> do exist.
 	 */
-	public void addItemEnd() throws orderingException{
+	public void addItemEnd() throws OrderingException {
 		checkItem();
 		printWriter.format("\t%s", "</Item>");
 		item = false;
@@ -297,12 +297,12 @@ public class Writer {
 	
 	/**
 	 * Adds </Order> tag
-	 * @throws orderingException If <FullTicket> and <Order> do exist this error will not occur.  Or if <Card> or <Item> do exist.
+	 * @throws OrderingException If <FullTicket> and <Order> do exist this error will not occur.  Or if <Card> or <Item> do exist.
 	 */
-	public void addOrderEnd() throws orderingException{
+	public void addOrderEnd() throws OrderingException {
 		checkOrder();
 		if(item){
-			throw new orderingException("Item Still Exists");
+			throw new OrderingException("Item Still Exists");
 		}
 		printWriter.format("%s", "</Order>");
 		order = false;
@@ -310,9 +310,9 @@ public class Writer {
 	
 	/**
 	 * Adds </FullTicket> tag
-	 * @throws orderingException -
+	 * @throws OrderingException -
 	 */
-	public void addFullTicketEnd() throws orderingException{
+	public void addFullTicketEnd() throws OrderingException {
 		checkFullTicket();
 		
 		printWriter.format("%s", "</FullTicket>");
@@ -322,14 +322,14 @@ public class Writer {
 	/**
 	 * Closes the file writer
 	 * @throws IOException - created by file writer
-	 * @throws orderingException - If <FullTicket>,<Item>,<Card> or <Order> still exist
+	 * @throws OrderingException - If <FullTicket>,<Item>,<Card> or <Order> still exist
 	 */
-	public void closeWriter() throws IOException, orderingException{
+	public void closeWriter() throws IOException, OrderingException {
 		if((!fullTicket)&&(!card)&&(!item)&&(!order)){
 			writeFile.close();
 		}
 		else{
-			throw new orderingException("One or more tags many not be closed");
+			throw new OrderingException("One or more tags many not be closed");
 		}
 			
 	}
