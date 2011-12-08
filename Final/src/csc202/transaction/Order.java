@@ -2,6 +2,7 @@ package csc202.transaction;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -11,8 +12,8 @@ import java.util.LinkedList;
  */
 public class Order implements Comparable<Order>{
 	private String orderNumber = "";
-	private Calendar date = Calendar.getInstance();
-	private SimpleDateFormat dateForm = new SimpleDateFormat("'Date:' yyyy.MM.dd '\nTime:' hh:mm:ss a zzz");
+	private Date date = new Date();
+	//private SimpleDateFormat dateForm = new SimpleDateFormat("'Date:' yyyy.MM.dd 'Time:' hh:mm:ss a zzz");
 	private LinkedList<Items> items = new LinkedList<Items>();
 	/**
 	 * Order Number
@@ -20,7 +21,7 @@ public class Order implements Comparable<Order>{
 	 */
 	public void setNumber(String number){
 		orderNumber = number;
-		dateForm.format(date.getTime());
+		//dateForm.format(date.getTime());
 	}
 	/**
 	 * @return Order Number
@@ -85,9 +86,9 @@ public class Order implements Comparable<Order>{
 	/**
 	 * Sets The Time and Date to Current Time and Date
 	 */
-	public void resetDate(){
-		dateForm.format(date.getTime());
-	}
+	//public void resetDate(){
+		//dateForm.format(date.getTime());
+	//}
 	/**
 	 * @return The Entire Linked List of items
 	 */
@@ -97,8 +98,11 @@ public class Order implements Comparable<Order>{
 	public String getOrderNumber(){
 		return orderNumber;
 	}
-	public String getOrderDate(){
-		return dateForm.toString(); //Will check if this is correct later
+	public void setOrderDate(Date date){
+		this.date = date;
+	}
+	public String getOrderDate(){				
+		return date.toString(); //TODO must fix this
 	}
 
     public double getTotalCost(){

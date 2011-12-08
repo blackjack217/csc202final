@@ -7,6 +7,9 @@ import csc202.transaction.Items;
 import csc202.transaction.Order;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -58,7 +61,9 @@ public class AddFullTicket {
 		
 		write.addFullTicketStart();
 		write.addFirstName(name.getFirstName());
-		//add middle name after figure out if char == null
+		if (name.getMiddleName()!='\u0000'){
+			write.addMiddleName(name.getMiddleName());
+		}
 		write.addLastName(name.getLastName());
 		
 		int i = card.getCardType();
@@ -74,10 +79,12 @@ public class AddFullTicket {
 		write.addCardStart(type);
 		Name cardHolder = card.getName();
 		write.addFirstName(cardHolder.getFirstName());
-		//add middle name after figure out if char == null
+		if (cardHolder.getMiddleName()!='\u0000'){
+			write.addMiddleName(cardHolder.getMiddleName());
+		}
 		write.addLastName(cardHolder.getLastName());
 		write.addCcNum(card.getCredit());
-		write.addExpDate(card.getExpirationDate().toString()); // this should work... if not i will fix it
+		write.addExpDate(dateFixer(card.getExpirationDate())); 
 		write.addVerCode(card.getVerification());
 		write.addCardEnd();
 		write.addOrderStart();
@@ -96,4 +103,10 @@ public class AddFullTicket {
 		write.addOrderEnd();
 		write.addFullTicketEnd();
 	}
+	private String dateFixer(Date date){
+		DateFormat sdf = new SimpleDateFormat("MM-yy");
+		return sdf.format(date);
+		
+	}
+	
 }

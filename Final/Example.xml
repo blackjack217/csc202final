@@ -32,33 +32,65 @@ to get yalls input -->
 .....
 </FullTicket>
 
-<!-- 
-Basically my thoughts here:
-Full ticket has 3 children- Name, Card,Order
-	*Name has tags for first last and middle 
-	*Card has 4 children- Name, ccNum, ExpDate, Ver 
-		-Name as the same tags so the code for full ticket can be reused
-	*Order has 3 children- Item , Number, Date
- -->
- 
- <!-- or -->
- 
- <FullTicket>
- <Name type= first></Name>
- <Name type= middle></Name>
- <Name type= last></Name>
- <ccName type = first></ccName>
- <ccName type = middle></ccName>
- <ccName type = last></ccName>
- <ccNumber></ccNumber>
- <ccExpDate></ccExpDate>
- <ccVer></ccVer>
- <OrderNum></OrderNum>
- <Item>
-	<title></title>
-	<Cost></Cost>
-	<Quantity></Quantity> 
- </Item>
- <Date></Date>
- </FullTicket>
- 
+<FullTicket>
+<Name type="first">Jon<Name>
+<Name type="last">Stewart<Name>
+<Card type="visa">
+	<Name type="first">Jon<Name>
+	<Name type="last">Stewart<Name>
+	<ccNumber>SafeString{encrypted=[63, 60, 62, 61, 57, 50, 56, 51, 59]}</ccNumber>
+	<expDate>01-12</expDate>
+	<verCode>SafeString{encrypted=[109, 108, 110]}</verCode>
+</Card>
+<Order>
+	<orderNum>12345</orderNum>
+	<orderDate>Wed Dec 07 11:11:11 EST 2011</orderDate>
+	<Item>
+		<itemName>Thing0</itemName>
+		<Price>9.99</Price>
+		<itemQuantity>1</itemQuantity>
+	</Item>
+</Order>
+</FullTicket>
+<FullTicket>
+<Name type="first">Jon<Name>
+<Name type="last">Stewart<Name>
+<Card type="visa">
+	<Name type="first">Jon<Name>
+	<Name type="last">Stewart<Name>
+	<ccNumber>SafeString{encrypted=[63, 60, 62, 61, 57, 50, 56, 51, 59]}</ccNumber>
+	<expDate>01-12</expDate>
+	<verCode>SafeString{encrypted=[109, 108, 110]}</verCode>
+</Card>
+<Order>
+	<orderNum>12345</orderNum>
+	<orderDate>Wed Dec 07 11:11:11 EST 2011</orderDate>
+	<Item>
+		<itemName>Thing0</itemName>
+		<Price>9.99</Price>
+		<itemQuantity>1</itemQuantity>
+	</Item>
+</Order>
+</FullTicket>
+<FullTicket>
+<Name type="first">Steven<Name>
+<Name type="middle">A<Name>
+<Name type="last">Colbert<Name>
+<Card type="visa">
+	<Name type="first">Steven<Name>
+	<Name type="middle">A<Name>
+	<Name type="last">Colbert<Name>
+	<ccNumber>SafeString{encrypted=[78, 79, 77, 72, 76, 73, 67, 74, 66]}</ccNumber>
+	<expDate>01-12</expDate>
+	<verCode>null</verCode>
+</Card>
+<Order>
+	<orderNum>54321</orderNum>
+	<orderDate>Wed Dec 07 11:11:11 EST 2011</orderDate>
+	<Item>
+		<itemName>Thing1</itemName>
+		<Price>1.99</Price>
+		<itemQuantity>5</itemQuantity>
+	</Item>
+</Order>
+</FullTicket>

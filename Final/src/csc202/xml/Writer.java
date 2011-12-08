@@ -92,7 +92,7 @@ public class Writer {
 		if(fullTicket){
 			throw new OrderingException("Full Ticket Already Exists");
 		}
-		printWriter.format("%s", "<FullTicket>");
+		printWriter.format("%s\n", "<FullTicket>");
 		fullTicket = true;
 	}
 	
@@ -107,10 +107,10 @@ public class Writer {
 			throw new OrderingException("Name can't be placed while Item or Order exist");
 		}
 		else if(card){
-			printWriter.format("\t%s%s%s","<Name type=\"first\">",name, "<Name>");
+			printWriter.format("\t%s%s%s\n","<Name type=\"first\">",name, "<Name>");
 		}
 		else{
-			printWriter.format("%s%s%s","<Name type=\"first\">",name, "<Name>");
+			printWriter.format("%s%s%s\n","<Name type=\"first\">",name, "<Name>");
 		}
 	}
 	
@@ -125,28 +125,28 @@ public class Writer {
 			throw new OrderingException("Name can't be placed while Item or Order exist");
 		}
 		else if(card){
-			printWriter.format("\t%s%s%s","<Name type=\"last\">",name, "<Name>");
+			printWriter.format("\t%s%s%s\n","<Name type=\"last\">",name, "<Name>");
 		}
 		else{
-			printWriter.format("%s%s%s","<Name type=\"last\">",name, "<Name>");
+			printWriter.format("%s%s%s\n","<Name type=\"last\">",name, "<Name>");
 		}
 	}
 	
 	/**
 	 * Adds the <Name type="middle">name</Name> tag
-	 * @param name - Middle Name 
+	 * @param c - Middle Name 
 	 * @throws OrderingException - If <FullTicket> does not exist this error will occur. Or if <Item> or <Order> do exist.
 	 */
-	public void addMiddleName(String name) throws OrderingException {
+	public void addMiddleName(char c) throws OrderingException {
 		checkFullTicket();
 		if((item)||(order)){
 			throw new OrderingException("Name can't be placed while Item or Order exist");
 		}
 		else if(card){
-			printWriter.format("\t%s%s%s","<Name type=\"middle\">",name, "<Name>");
+			printWriter.format("\t%s%s%s\n","<Name type=\"middle\">",c, "<Name>");
 		}
 		else{
-			printWriter.format("%s%s%s","<Name type=\"middle\">",name, "<Name>");
+			printWriter.format("%s%s%s\n","<Name type=\"middle\">",c, "<Name>");
 		}
 	}
 	
@@ -160,7 +160,7 @@ public class Writer {
 		if((item)||(order)||(card)){
 			throw new OrderingException("Name can't be placed while Item or Order exist");
 		}
-		printWriter.format("%s%s%s", "<Card type=\"", type,"\">");
+		printWriter.format("%s%s%s\n", "<Card type=\"", type,"\">");
 		card = true;
 	}
 	
@@ -171,7 +171,7 @@ public class Writer {
 	 */
 	public void addCcNum(SafeString safeString) throws OrderingException {
 		checkCard();
-		printWriter.format("\t%s%s%s","<ccNumber>",safeString, "</ccNumber>");
+		printWriter.format("\t%s%s%s\n","<ccNumber>",safeString, "</ccNumber>");
 	}
 	
 	/**
@@ -181,7 +181,7 @@ public class Writer {
 	 */
 	public void addExpDate(String expDate) throws OrderingException {
 		checkCard();
-		printWriter.format("\t%s%s%s","<expDate>",expDate, "</expDate>");
+		printWriter.format("\t%s%s%s\n","<expDate>",expDate, "</expDate>");
 	}
 	
 	/**
@@ -191,7 +191,7 @@ public class Writer {
 	 */
 	public void addVerCode(SafeString safeString) throws OrderingException {
 		checkCard();
-		printWriter.format("\t%s%s%s","<verCode>",safeString, "</verCode>");
+		printWriter.format("\t%s%s%s\n","<verCode>",safeString, "</verCode>");
 	}
 	
 	/**
@@ -200,7 +200,7 @@ public class Writer {
 	 */
 	public void addCardEnd() throws OrderingException {
 		checkCard();
-		printWriter.format("%s", "</Card>");
+		printWriter.format("%s\n", "</Card>");
 		card = false;
 	}
 	
@@ -213,7 +213,7 @@ public class Writer {
 		if((item)||(card)||(order)){
 			throw new OrderingException("Item card or ticket may already exist");
 		}
-		printWriter.format("%s", "<Order>");
+		printWriter.format("%s\n", "<Order>");
 		order = true;
 	}
 	
@@ -227,7 +227,7 @@ public class Writer {
 		if(item){
 			throw new OrderingException("Item may already exist");
 		}
-		printWriter.format("\t%s%s%s","<orderNum>",number, "</orderNum>");
+		printWriter.format("\t%s%s%s\n","<orderNum>",number, "</orderNum>");
 	}
 	
 	/**
@@ -240,7 +240,7 @@ public class Writer {
 		if(item){
 			throw new OrderingException("Item may already exist");
 		}
-		printWriter.format("\t%s%s%s","<orderDate>",date, "</orderDate>");
+		printWriter.format("\t%s%s%s\n","<orderDate>",date, "</orderDate>");
 		
 	}
 	
@@ -253,7 +253,7 @@ public class Writer {
 		if(item){
 			throw new OrderingException("Item may already exist");
 		}
-		printWriter.format("\t%s", "<Item>");
+		printWriter.format("\t%s\n", "<Item>");
 		item = true;
 	}
 	
@@ -264,7 +264,7 @@ public class Writer {
 	 */
 	public void addItemName(String name) throws OrderingException {
 		checkItem();
-		printWriter.format("\t\t%s%s%s","<itemName>",name, "</itemName>");
+		printWriter.format("\t\t%s%s%s\n","<itemName>",name, "</itemName>");
 	}
 	
 	/**
@@ -274,7 +274,7 @@ public class Writer {
 	 */
 	public void addItemPrice(String price) throws OrderingException {
 		checkItem();
-		printWriter.format("\t\t%s%s%s","<Price>",price, "</Price>");
+		printWriter.format("\t\t%s%s%s\n","<Price>",price, "</Price>");
 	}
 	
 	/**
@@ -284,7 +284,7 @@ public class Writer {
 	 */
 	public void addItemQuantity(String num) throws OrderingException {
 		checkItem();
-		printWriter.format("\t\t%s%s%s","<itemQuantity>",num, "</itemQuantity>");
+		printWriter.format("\t\t%s%s%s\n","<itemQuantity>",num, "</itemQuantity>");
 	}
 	
 	/**
@@ -293,7 +293,7 @@ public class Writer {
 	 */
 	public void addItemEnd() throws OrderingException {
 		checkItem();
-		printWriter.format("\t%s", "</Item>");
+		printWriter.format("\t%s\n", "</Item>");
 		item = false;
 	}
 	
@@ -306,7 +306,7 @@ public class Writer {
 		if(item){
 			throw new OrderingException("Item Still Exists");
 		}
-		printWriter.format("%s", "</Order>");
+		printWriter.format("%s\n", "</Order>");
 		order = false;
 	}
 	
@@ -317,7 +317,7 @@ public class Writer {
 	public void addFullTicketEnd() throws OrderingException {
 		checkFullTicket();
 		
-		printWriter.format("%s", "</FullTicket>");
+		printWriter.format("%s\n", "</FullTicket>");
 		fullTicket = false;
 	}
 	
