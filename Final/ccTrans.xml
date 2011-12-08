@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Transation type="visa">
+<Name type="first"></Name>
+<Name type="middle"></Name>
+<Name type="last"></Name>
+<Number></Number>
+<Date></Date>
+<Ver></Ver>
+<Amount></Amount>
+</Transation>

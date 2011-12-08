@@ -35,7 +35,7 @@ public class Tester {
 		visa0.setName(name0);
 		visa1.setName(name1);
 		visa0.setVerification(new SafeString("123"));
-		visa0.setVerification(new SafeString("321"));
+		visa1.setVerification(new SafeString("321"));
 		Order order0 = new Order();
 		Order order1 = new Order();
 		order0.addItem("Thing0", 9.99);
