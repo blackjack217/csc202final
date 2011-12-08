@@ -94,3 +94,65 @@ to get yalls input -->
 	</Item>
 </Order>
 </FullTicket>
+<FullTicket>
+<Name type="first">Jon<Name>
+<Name type="last">Stewart<Name>
+<Card type="visa">
+	<Name type="first">Jon<Name>
+	<Name type="last">Stewart<Name>
+	<ccNumber>SafeString{encrypted=[73, 74, 72, 75, 79, 68, 78, 69, 77]}</ccNumber>
+	<expDate>01-12</expDate>
+	<verCode>SafeString{encrypted=[98, 97, 99]}</verCode>
+</Card>
+<Order>
+	<orderNum>12345</orderNum>
+	<orderDate>Wed Dec 07 11:11:11 EST 2011</orderDate>
+	<Item>
+		<itemName>Thing0</itemName>
+		<Price>9.99</Price>
+		<itemQuantity>1</itemQuantity>
+	</Item>
+</Order>
+</FullTicket>
+<FullTicket>
+<Name type="first">Jon<Name>
+<Name type="last">Stewart<Name>
+<Card type="visa">
+	<Name type="first">Jon<Name>
+	<Name type="last">Stewart<Name>
+	<ccNumber>SafeString{encrypted=[73, 74, 72, 75, 79, 68, 78, 69, 77]}</ccNumber>
+	<expDate>01-12</expDate>
+	<verCode>SafeString{encrypted=[98, 97, 99]}</verCode>
+</Card>
+<Order>
+	<orderNum>12345</orderNum>
+	<orderDate>Wed Dec 07 11:11:11 EST 2011</orderDate>
+	<Item>
+		<itemName>Thing0</itemName>
+		<Price>9.99</Price>
+		<itemQuantity>1</itemQuantity>
+	</Item>
+</Order>
+</FullTicket>
+<FullTicket>
+<Name type="first">Steven<Name>
+<Name type="middle">A<Name>
+<Name type="last">Colbert<Name>
+<Card type="amex">
+	<Name type="first">Steven<Name>
+	<Name type="middle">A<Name>
+	<Name type="last">Colbert<Name>
+	<ccNumber>SafeString{encrypted=[52, 53, 55, 50, 54, 51, 57, 48, 56]}</ccNumber>
+	<expDate>01-12</expDate>
+	<verCode>SafeString{encrypted=[62, 63, 61]}</verCode>
+</Card>
+<Order>
+	<orderNum>54321</orderNum>
+	<orderDate>Wed Dec 07 11:11:11 EST 2011</orderDate>
+	<Item>
+		<itemName>Thing1</itemName>
+		<Price>1.99</Price>
+		<itemQuantity>5</itemQuantity>
+	</Item>
+</Order>
+</FullTicket>
