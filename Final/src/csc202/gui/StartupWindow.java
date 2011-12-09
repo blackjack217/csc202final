@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class StartupWindow implements ActionListener {
 	//Dimensions of the window
-	int WindowHeight = 350;
+	int WindowHeight = 250;
 	int WindowWidth = 300;
 	
 	//Dimensions of the buttons
@@ -29,11 +29,13 @@ public class StartupWindow implements ActionListener {
 	//creates the buttons
 	JButton order = new JButton("Place order");
 	JButton returnOrder = new JButton("Return Order");
-	JButton lookUpNumber = new JButton("Look up order by number");
-	JButton lookUpCustomer = new JButton("Look up order by name");
 	
 	
-	public StartupWindow(){
+	public StartupWindow(JFrame frame){
+		
+		window = frame;
+		window.getContentPane().removeAll();
+		
 		//setup the JFrame
 		window.setSize(WindowWidth, WindowHeight);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,33 +43,19 @@ public class StartupWindow implements ActionListener {
 		
 		//setup the order button
 		order.setSize(ButtonWidth, ButtonHeight);
-		order.setLocation(CenterButtonX, CenterButtonY -(ButtonHeight / 2) - ButtonHeight - 15);
+		order.setLocation(CenterButtonX, CenterButtonY -(ButtonHeight / 2) - 5);
 		order.setActionCommand("order");
 		order.addActionListener(this);
 		
 		//setup the return order button
 		returnOrder.setSize(ButtonWidth, ButtonHeight);
-		returnOrder.setLocation(CenterButtonX, CenterButtonY -(ButtonHeight / 2) - 5);
+		returnOrder.setLocation(CenterButtonX, CenterButtonY + (ButtonHeight / 2) + 5);
 		returnOrder.setActionCommand("return");
 		returnOrder.addActionListener(this);
-		
-		//setup the look up customer button
-		lookUpCustomer.setSize(ButtonWidth, ButtonHeight);
-		lookUpCustomer.setLocation(CenterButtonX, CenterButtonY + (ButtonHeight/2) + 5);
-		lookUpCustomer.setActionCommand("customer");
-		lookUpCustomer.addActionListener(this);
-		
-		//setup look up number button
-		lookUpNumber.setSize(ButtonWidth, ButtonHeight);
-		lookUpNumber.setLocation(CenterButtonX, CenterButtonY + (ButtonHeight/2) + ButtonHeight + 15);
-		lookUpNumber.setActionCommand("number");
-		lookUpNumber.addActionListener(this);
 		
 		//add to the JFrame
 		window.add(order);
 		window.add(returnOrder);
-		window.add(lookUpCustomer);
-		window.add(lookUpNumber);
 		
 		window.setLocationRelativeTo(null);
 		window.setResizable(false);
@@ -78,25 +66,14 @@ public class StartupWindow implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		//Order button handler
 		if(e.getActionCommand() == "order"){
-			ShoppingCart j = new ShoppingCart(0.0, null);
-			window.setVisible(false);
+			ShoppingCart j = new ShoppingCart(window, 0.0, null);
 		}
 		
-		//Return button handler
+		//return button handler
 		else if(e.getActionCommand() == "return"){
-			
+			SearchWindow c = new SearchWindow(window);
 		}
 		
-		//Customer search button handler
-		else if(e.getActionCommand() == "customer"){
-			SearchWindow c = new SearchWindow();
-			window.setVisible(false);
-		}
-		
-		//Order number button handler
-		else if(e.getActionCommand() == "number"){
-			
-		}
 		
 	}
 

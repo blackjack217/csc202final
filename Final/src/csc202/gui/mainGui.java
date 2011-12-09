@@ -1,10 +1,13 @@
 package csc202.gui;
 
+import javax.swing.JFrame;
+
 
 public class mainGui {
 
 	public static void main(String[] args) {
-		StartupWindow j = new StartupWindow();
+		JFrame frame = new JFrame();
+		StartupWindow j = new StartupWindow(frame);
 
 
 	}

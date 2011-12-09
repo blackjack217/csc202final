@@ -30,7 +30,10 @@ public class SearchWindow implements CaretListener, ActionListener{
 	JLabel nameMsg = new JLabel("Search by name");
 	JLabel numberMsg = new JLabel("Search by transaction number");
 	
-	public SearchWindow(){
+	public SearchWindow(JFrame frame){
+		window = frame;
+		window.getContentPane().removeAll();
+		
 		window.setSize(800,600);
 		window.setLayout(null);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,8 +88,6 @@ public class SearchWindow implements CaretListener, ActionListener{
 		window.add(CBnumber);
 		
 		window.setLocationRelativeTo(null);
-		window.setResizable(false);
-		window.setVisible(true);
 		
 	}
 
@@ -111,8 +112,7 @@ public class SearchWindow implements CaretListener, ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "back"){
-			StartupWindow j = new StartupWindow();
-			window.setVisible(false);
+			StartupWindow j = new StartupWindow(window);
 		}
 		if(e.getActionCommand() == "next"){
 			

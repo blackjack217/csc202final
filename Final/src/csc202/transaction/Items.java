@@ -83,4 +83,7 @@ public class Items {
 	public double getTotalPrice(){
 		return cost * (double)quantity;
 	}
+	public String toString(){
+		return quantity + " unit(s) of " + item + " for $" + cost+ " each.";
+	}
 }

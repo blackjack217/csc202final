@@ -34,7 +34,11 @@ public class ShoppingCart implements ActionListener{
 	LinkedList<Items> itemList = new LinkedList<Items>();
 	
 	//sets up the main window
-	public ShoppingCart(Double price, LinkedList<Items> tempList){
+	public ShoppingCart(JFrame frame, Double price, LinkedList<Items> tempList){
+		
+		window = frame;
+		window.getContentPane().removeAll();
+		
 		amount = price;
 		amountMsg.setText(Double.toString(amount));
 		
@@ -87,20 +91,16 @@ public class ShoppingCart implements ActionListener{
 		window.add(orderScroll);
 		
 		window.setLocationRelativeTo(null);
-		window.setResizable(false);
-		window.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		//controls the continue button
 		if(e.getActionCommand() == "next"){
-			OrderWindow a = new OrderWindow(amount , itemList);
-			window.setVisible(false);
+			OrderWindow a = new OrderWindow(window, amount , itemList);
 		}
 		//controls the back button
 		if(e.getActionCommand() == "back"){
-			StartupWindow b = new StartupWindow();
-			window.setVisible(false);
+			StartupWindow b = new StartupWindow(window);
 		}
 		//controls the add item button
 		if(e.getActionCommand() == "addItem"){
@@ -242,7 +242,7 @@ public class ShoppingCart implements ActionListener{
 		}
 		else{
 			removeWindow.setTitle("Remove Item");
-			removeWindow.setSize(250,190);
+			removeWindow.setSize(300,190);
 			removeWindow.setLayout(null);
 			
 			JLabel removeMsg = new JLabel("Remove which item?");
@@ -251,7 +251,7 @@ public class ShoppingCart implements ActionListener{
 			removeMsg.setLocation(35,35);
 			
 			remove.setSize(90,25);
-			remove.setLocation(115,100);
+			remove.setLocation(175,100);
 			remove.addActionListener(this);
 			remove.setActionCommand("remove item");
 			
@@ -261,7 +261,7 @@ public class ShoppingCart implements ActionListener{
 			close.addActionListener(this);
 			
 			setupComboBox();
-			orderList.setSize(170,30);
+			orderList.setSize(230,30);
 			orderList.setLocation(35, 60);
 			
 			removeWindow.add(removeMsg);
@@ -272,7 +272,6 @@ public class ShoppingCart implements ActionListener{
 			removeWindow.setLocationRelativeTo(null);
 			removeWindow.setResizable(false);
 			removeWindow.setVisible(true);
-			//String.format("%.2d", nameOfDouble);
 		}
 	}
 	

@@ -48,7 +48,10 @@ public class OrderWindow implements ActionListener {
 	
 	LinkedList<Items> list;
 	
-	public OrderWindow(double price, LinkedList<Items> tempList){
+	public OrderWindow(JFrame frame, double price, LinkedList<Items> tempList){
+		window = frame;
+		window.getContentPane().removeAll();
+		
 		amount = price;
 		purchaseAmountMsg.setText(purchaseAmountMsg.getText() + amount);
 		list = tempList;
@@ -140,14 +143,11 @@ public class OrderWindow implements ActionListener {
 		window.add(back);
 		
 		window.setLocationRelativeTo(null);
-		window.setResizable(false);
-		window.setVisible(true);
 		
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "back"){
-			ShoppingCart a = new ShoppingCart(amount, list);
-			window.setVisible(false);
+			ShoppingCart a = new ShoppingCart(window, amount, list);
 		}
 		if(e.getActionCommand() == "order"){
 			if(checkValidExpiration() == true){
